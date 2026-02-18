@@ -588,14 +588,14 @@
                 <a href="https://www.youtube.com/@ArtiKataKita" class="social-link-modern"><i class="fab fa-youtube"></i></a>
             </div>
             <div class="col-lg-3 col-md-12 text-center text-lg-end mb-2 mb-lg-0">
-                <div class="footer-contact-item py-1 px-3 border rounded-pill d-inline-flex align-items-center">
-                    <i class="fas fa-envelope me-2"></i> hello@akk.com
-                </div>
+            <div class="footer-contact-item py-1 px-3 border rounded-pill d-inline-flex align-items-center">
+                <i class="fas fa-envelope me-2"></i> artikatakita9@gmail.com
             </div>
+             </div>
             <div class="col-lg-3 col-md-12 text-center text-lg-end">
-                <div class="footer-contact-item py-1 px-3 border rounded-pill d-inline-flex align-items-center">
-                    <i class="fab fa-whatsapp me-2"></i> +62 858-7987-4187
-                </div>
+                <a href="https://wa.me/628157642627" target="_blank" class="footer-contact-item py-1 px-3 border rounded-pill d-inline-flex align-items-center text-decoration-none">
+                    <i class="fab fa-whatsapp"></i> Hubungi Kami
+                </a>
             </div>
         </div>
         <div class="text-center mt-4 pt-3 border-top opacity-50 small" style="border-color: rgba(255,255,255,.05);">
