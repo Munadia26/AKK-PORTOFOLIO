@@ -176,7 +176,7 @@
         .hero {
             position: relative;
             padding: 0;
-            background: url('<?= base_url('assets/img/Background.jpeg') ?>') center/cover no-repeat fixed;
+            background: url('<?= base_url('assets/img/background2.jpeg') ?>') center/cover no-repeat fixed;
             min-height: 100vh;
             display: flex;
             align-items: center;
