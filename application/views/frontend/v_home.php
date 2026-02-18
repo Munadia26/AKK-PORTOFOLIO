@@ -1251,16 +1251,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-12 text-center text-lg-end">
-    <div class="d-flex flex-row flex-wrap justify-content-center justify-content-lg-end gap-2">
-        <a href="https://wa.me/628157642627" target="_blank" 
-           class="footer-contact-item py-2 px-4 border rounded-pill d-inline-flex align-items-center text-decoration-none text-white transition-all shadow-sm" 
-           style="white-space: nowrap; width: fit-content; cursor: pointer; background-color: #25D366; border-color: #25D366; font-weight: 600; font-size: 1.1rem;">
-            
-            <i class="fab fa-whatsapp me-2" style="font-size: 1.4rem;"></i> 
-            Hubungi Kami
-        </a>
-    </div>
+             <div class="col-lg-3 col-md-12 text-center text-lg-end">
+                <a href="https://wa.me/628157642627" target="_blank" class="footer-contact-item py-1 px-3 border rounded-pill d-inline-flex align-items-center text-decoration-none">
+                    <i class="fab fa-whatsapp"></i> Hubungi Kami
+                </a>
+            </div>
 </div>
 
 <style>
