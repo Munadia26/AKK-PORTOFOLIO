@@ -137,7 +137,7 @@
         .detail-hero {
             position: relative;
             padding: 140px 0 80px;
-            background: url('<?= base_url('assets/img/Background.jpeg') ?>') center/cover no-repeat fixed;
+            background: url('<?= base_url('assets/img/background2.jpeg') ?>') center/cover no-repeat fixed;
             min-height: 350px;
             display: flex;
             align-items: center;
