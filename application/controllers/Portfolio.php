@@ -96,6 +96,42 @@ class Portfolio extends CI_Controller {
         redirect(base_url('portfolio/profil'));
     }
 
+    public function divisi() {
+        if($this->session->userdata('status') != "login") redirect(base_url('login'));
+        $data['divisi'] = $this->M_data->get_divisi();
+        $this->load->view('admin/v_divisi', $data);
+    }
+
+    public function tambah_divisi() {
+        if($this->session->userdata('status') != "login") redirect(base_url('login'));
+        $data = [
+            'nama_divisi'      => $this->input->post('nama_divisi'),
+            'deskripsi_singkat'=> $this->input->post('deskripsi_singkat')
+        ];
+        $this->M_data->insert_data('divisi', $data);
+        $this->session->set_flashdata('pesan', 'Divisi berhasil ditambahkan!');
+        redirect('portfolio/divisi');
+    }
+
+    public function update_divisi() {
+        if($this->session->userdata('status') != "login") redirect(base_url('login'));
+        $id   = $this->input->post('id_divisi');
+        $data = [
+            'nama_divisi'      => $this->input->post('nama_divisi'),
+            'deskripsi_singkat'=> $this->input->post('deskripsi_singkat')
+        ];
+        $this->M_data->update_data(['id_divisi' => $id], $data, 'divisi');
+        $this->session->set_flashdata('pesan', 'Divisi berhasil diperbarui!');
+        redirect('portfolio/divisi');
+    }
+
+    public function hapus_divisi($id) {
+        if($this->session->userdata('status') != "login") redirect(base_url('login'));
+        $this->M_data->hapus_data(['id_divisi' => $id], 'divisi');
+        $this->session->set_flashdata('pesan', 'Divisi berhasil dihapus!');
+        redirect('portfolio/divisi');
+    }
+
     // --- CRUD PROGRAM ---
     public function program() {
         if($this->session->userdata('status') != "login") redirect(base_url('login'));
