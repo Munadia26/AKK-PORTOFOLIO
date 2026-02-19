@@ -67,7 +67,8 @@ class Portfolio extends CI_Controller {
     // --- ADMIN DASHBOARD & PROFIL ---
     public function dashboard() {
         if($this->session->userdata('status') != "login") redirect(base_url('login'));
-        $data['program'] = $this->db->get('program')->result_array();
+        $data['program']     = $this->db->get('program')->result_array();
+        $data['dokumentasi'] = $this->db->get('dokumentasi')->result_array();
         $this->load->view('admin/v_dashboard', $data);
     }
 
