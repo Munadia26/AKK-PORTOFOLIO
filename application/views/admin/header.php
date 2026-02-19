@@ -355,7 +355,9 @@
         <a href="<?= base_url('portfolio/profil'); ?>" class="nav-link <?= ($segment == 'profil') ? 'active' : ''; ?>">
             <i class="fa-solid fa-id-card"></i> Profil AKK
         </a>
-        
+        <a href="<?= base_url('portfolio/divisi'); ?>" class="nav-link <?= ($segment == 'divisi') ? 'active' : ''; ?>">
+            <i class="fas fa-sitemap fa-lg"></i> Divisi
+        </a>
         <a href="<?= base_url('portfolio/program'); ?>" class="nav-link <?= ($segment == 'program') ? 'active' : ''; ?>">
             <i class="fa-solid fa-layer-group"></i> Program
         </a>
