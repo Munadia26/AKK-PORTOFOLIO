@@ -72,55 +72,33 @@
         
         a { text-decoration: none; transition: 0.3s ease; }
         
-        /* --- CLEAN NAVBAR (Same as Home) --- */
+        /* ── NAVBAR ── */
         .navbar {
-            padding: 20px 0;
-            background-color: rgba(0, 0, 0, 0.1); 
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.4s ease;
+            padding: 18px 0;
+            background-color: rgba(0,0,0,.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,.08);
+            transition: all .4s ease;
             z-index: 1030;
         }
-
         .navbar-scrolled {
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(0);
-            -webkit-backdrop-filter: blur(0);
-            border-bottom: 1px solid #f1f5f9;
-            box-shadow: var(--shadow-subtle);
-            padding: 15px 0;
+            background-color: rgba(15,20,25,.97);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 4px 20px rgba(0,0,0,.5);
+            padding: 12px 0;
         }
-        
-        .navbar-toggler { border: none; padding: 0; color: rgba(255, 255, 255, 0.9); }
+        .navbar-toggler { border: none; padding: 0; }
         .navbar-toggler:focus { box-shadow: none; }
-        .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-        }
-        .navbar-scrolled .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%232C3E50' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-        }
-        
-        .navbar-brand { padding: 0; margin-right: 1rem; display: flex; align-items: center; }
-        .navbar-brand img { height: 60px; width: auto; transition: all 0.3s ease; }
-        
-        .nav-link {
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.9) !important;
-            margin-left: 2rem;
-            font-size: 0.95rem;
-            transition: color 0.3s ease;
-        }
-        .nav-link:hover, .nav-link.active { color: var(--yellow) !important; opacity: 1; }
-        .navbar-scrolled .nav-link { color: var(--dark) !important; }
-        .navbar-scrolled .nav-link:hover, .navbar-scrolled .nav-link.active { color: var(--cyan) !important; }
-
+        .navbar-toggler-icon { background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"); }
+        .navbar-brand { padding: 0; }
+        .navbar-brand img { height: 58px; width: auto; transition: .3s; }
+        .nav-link { font-weight: 500; color: rgba(255,255,255,.9) !important; margin-left: 1.8rem; font-size: .92rem; }
+        .nav-link:hover, .nav-link.active { color: var(--yellow) !important; }
         @media (max-width: 991px) {
-            .navbar-collapse {
-                background: white; padding: 20px; border-radius: 12px;
-                box-shadow: var(--shadow-hover); margin-top: 10px;
-            }
-            .nav-link { color: var(--dark) !important; margin-left: 0; padding: 10px 0; }
+            .navbar-collapse { background: rgba(15,20,25,.98); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); margin-top: 12px; }
+            .nav-link { color: var(--text-primary) !important; margin-left: 0; padding: 10px 0; border-bottom: 1px solid var(--border-color); }
+            .nav-link:last-child { border-bottom: none; }
         }
         
         .btn-login {
@@ -259,6 +237,21 @@
         .sidebar-sticky {
             position: sticky;
             top: 100px;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border-color) transparent;
+        }
+
+        .sidebar-sticky::-webkit-scrollbar {
+            width: 4px;
+        }
+        .sidebar-sticky::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .sidebar-sticky::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
         }
         
         .sidebar-card {
@@ -482,7 +475,7 @@
 </head>
 <body>
 
-    <!-- Navbar (Same as Home) -->
+    <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             <a class="navbar-brand" href="<?= base_url() ?>">
@@ -496,7 +489,8 @@
                     <li class="nav-item"><a class="nav-link" href="<?= base_url() ?>#hero">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= base_url() ?>#about">Tentang</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= base_url() ?>#program">Program</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="<?= base_url() ?>#dokumentasi">Dokumentasi</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="<?= base_url('dokumentasi') ?>">Dokumentasi</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= base_url() ?>#gabung">Gabung Volunteer</a></li>
                 </ul>
             </div>
         </div>
@@ -524,7 +518,7 @@
     <!-- Main Content Section -->
     <main class="main-content">
         <div class="container">
-            <div class="row g-5">
+            <div class="row g-5 align-items-start">
                 <!-- Left Column: Article -->
                 <div class="col-lg-8">
                     <div class="article-card fade-in-up">
@@ -629,7 +623,8 @@
 
              <div class="col-lg-3 col-md-12 text-center text-lg-end mb-2 mb-lg-0">
             <div class="footer-contact-item py-1 px-3 border rounded-pill d-inline-flex align-items-center">
-                <i class="fas fa-envelope me-2"></i> artikatakita9@gmail.com
+                <i class="fas fa-envelope me-2"></i> 
+                <a href="mailto:artikatakita9@gmail.com">artikatakita9@gmail.com</a>
             </div>
              </div>
             <div class="col-lg-3 col-md-12 text-center text-lg-end">
@@ -646,3 +641,32 @@
         </div>
     </div>
 </footer>
+
+    <!-- Bootstrap Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navbar Scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+        });
+
+        // Back to Top
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+        backToTop.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

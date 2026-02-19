@@ -52,7 +52,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <p class="small fw-bold mb-1 text-uppercase" style="color: var(--text-muted); letter-spacing: 0.05em;">Dokumentasi</p>
-                            <h2 class="mb-0 fw-bold" style="color: var(--text-primary);">12</h2> 
+                            <h2 class="mb-0 fw-bold" style="color: var(--text-primary);"><?= count($dokumentasi); ?></h2>
                         </div>
                         <div class="icon-shape shadow-sm d-flex align-items-center justify-content-center" 
                              style="width: 56px; height: 56px; background: rgba(255, 215, 0, 0.1); color: var(--yellow-bright); border-radius: 15px; box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);">

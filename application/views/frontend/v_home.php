@@ -921,7 +921,7 @@
             </div>
             
             <div class="dokumentasi-wrapper">
-                <button class="slide-nav-btn slide-prev" onclick="slideDoc('prev')" id="prevBtn">
+                <button class="slide-nav-btn slide-prev" id="prevBtn">
                     <i class="fas fa-chevron-left"></i>
                 </button>
 
@@ -953,7 +953,7 @@
                     </div>
                 </div>
 
-                <button class="slide-nav-btn slide-next" onclick="slideDoc('next')" id="nextBtn">
+                <button class="slide-nav-btn slide-next" id="nextBtn">
                     <i class="fas fa-chevron-right"></i>
                 </button>
             </div>
@@ -1247,7 +1247,8 @@
             <div class="col-lg-3 col-md-12 text-center text-lg-end">
                 <div class="d-flex flex-row flex-wrap justify-content-center justify-content-lg-end gap-2">
                     <div class="footer-contact-item py-1 px-3 border rounded-pill d-inline-flex align-items-center" style="white-space: nowrap; width: fit-content;">
-                        <i class="fas fa-envelope me-2"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ee868b828281ae8f8585c08d8183"><span class="__cf_email__" data-cfemail="660714120f0d0712070d0f12075f26010b070f0a4805090b"><span class="__cf_email__" data-cfemail="7c1d0e0815171d081d1715081d453c1b111d1510521f1311">[email&#160;protected]</span></span></a>
+                        <i class="fas fa-envelope me-2"></i> 
+                        <a href="mailto:artikatakita9@gmail.com">artikatakita9@gmail.com</a>
                     </div>
                 </div>
             </div>
@@ -1276,7 +1277,7 @@
 </footer>
 
     <!-- Bootstrap Bundle -->
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom Scripts -->
     <script>
         // Navbar Glassmorphism Scroll
@@ -1381,4 +1382,17 @@
                 if (currentIndex > 0) {
                     currentIndex--;
                     updateSlider();
- 
+                }
+            }
+        }
+
+        // Init slider on load
+        updateSlider();
+
+        // Re-calculate on resize
+        window.addEventListener('resize', () => {
+            updateSlider();
+        });
+
+    </script>
+
