@@ -14,6 +14,7 @@
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
     
     <style>
         :root {
@@ -141,19 +142,20 @@
         /* Mobile Menu */
         @media (max-width: 991px) {
             .navbar-collapse {
-                background: rgba(255, 255, 255, 0.98);
+                background: rgba(15, 20, 25, 0.98);
                 padding: 20px;
                 border-radius: 12px;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-                margin-top: 15px;
+                border: 1px solid var(--border-color);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+                margin-top: 12px;
             }
             .nav-link {
-                color: var(--dark) !important;
+                color: var(--text-primary) !important;
                 margin-left: 0;
-                padding: 12px 0;
-                border-bottom: 1px solid rgba(0,0,0,0.05);
+                padding: 10px 0;
+                border-bottom: 1px solid var(--border-color);
             }
-            .nav-link:hover { color: var(--cyan) !important; }
+            .nav-link:hover, .nav-link.active { color: var(--yellow) !important; }
             .nav-link:last-child { border-bottom: none; }
             .btn-login { width: 100%; margin-top: 10px; text-align: center; }
         }
@@ -219,7 +221,41 @@
             backdrop-filter: blur(4px);
             border: 1px solid rgba(255, 215, 0, 0.3);
         }
+     .hero-slider-wrapper {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    }
 
+    #heroCarousel, .carousel-inner, .carousel-item {
+        height: 100%;
+    }
+
+    .hero-slide-bg {
+        width: 100%;
+        height: 100vh;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        /* Pastikan TIDAK ADA properti 'animation' di sini agar tidak zoom */
+    }
+
+    .hero-slider-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to right, rgba(15, 20, 25, 0.85) 0%, rgba(64, 224, 208, 0.2) 100%);
+        z-index: 2;
+    }
+
+    .hero-content-fixed {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        transform: translateY(-50%);
+        z-index: 3;
+    }
         /* --- DARK SECTIONS (MODIFIED) --- */
         section {
             padding: var(--section-padding) 0;
@@ -458,20 +494,229 @@
             padding: 1.5rem;
         }
 
-        /* Update warna teks di dalam modal program */
-.program-content h5 {
-    color: var(--cyan) !important; /* Mengubah judul program jadi Cyan */
-    text-shadow: 0 0 10px rgba(64, 224, 208, 0.2);
-    margin-bottom: 15px;
-}
+                /* Update warna teks di dalam modal program */
+        .program-content h5 {
+            color: var(--cyan) !important; /* Mengubah judul program jadi Cyan */
+            text-shadow: 0 0 10px rgba(64, 224, 208, 0.2);
+            margin-bottom: 15px;
+        }
 
-.program-description-full {
-    font-size: 0.95rem;
-    color: var(--text-secondary) !important; /* Menggunakan warna abu-abu terang */
-    line-height: 1.7;
-}
+        .program-description-full {
+            font-size: 0.95rem;
+            color: var(--text-secondary) !important; /* Menggunakan warna abu-abu terang */
+            line-height: 1.7;
+        }
 
-        /* --- DOCUMENTATION SLIDER DARK --- */
+        /* --- AKK GALLERY CATEGORY STYLE --- */
+        .btn-filter {
+            border: 1px solid rgba(64, 224, 208, 0.3);
+            color: white;
+            background: transparent;
+            padding: 8px 25px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .btn-filter:hover, .btn-filter.active {
+            background: var(--cyan);
+            color: #0f1419;
+            border-color: var(--cyan);
+            box-shadow: 0 5px 15px rgba(64, 224, 208, 0.3);
+        }
+
+         html {
+            scroll-behavior: smooth;
+        }
+        #gallery {
+            scroll-margin-top: 100px;
+        }
+
+        /* Filter Buttons */
+        .btn-filter {
+            border: 1px solid rgba(64, 224, 208, 0.3);
+            color: rgba(255,255,255,0.85);
+            background: transparent;
+            padding: 7px 20px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-size: 0.82rem;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        .btn-filter:hover, .btn-filter.active {
+            background: var(--cyan);
+            color: #0f1419;
+            border-color: var(--cyan);
+            box-shadow: 0 5px 15px rgba(64, 224, 208, 0.3);
+        }
+
+        /* Gallery Card Wrapper */
+        .gallery-card {
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        .gallery-card.hide {
+            display: none !important;
+        }
+
+        /* Gallery Item Box */
+        .gallery-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 1 / 1;
+            background: #1a2026;
+            cursor: pointer;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+            transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .gallery-item:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 16px 40px rgba(64, 224, 208, 0.18);
+            border-color: var(--cyan);
+        }
+
+        /* Image */
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.55s ease;
+            display: block;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Overlay */
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10, 14, 19, 0.93) 20%, rgba(64, 224, 208, 0.05) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 18px 20px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 2;
+        }
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        /* Di mobile (touch device): overlay selalu tampil samar agar judul terbaca */
+        @media (hover: none) {
+            .gallery-overlay {
+                opacity: 1;
+                background: linear-gradient(to top, rgba(10,14,19,0.85) 10%, transparent 65%);
+            }
+        }
+
+        /* Category Tag */
+        .cat-tag {
+            display: inline-block;
+            background: var(--yellow);
+            color: #000;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 50px;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        /* Info Text */
+        .gallery-info h5 {
+            color: #fff;
+            font-size: 0.88rem;
+            font-weight: 600;
+            margin-bottom: 3px;
+            line-height: 1.3;
+        }
+        .gallery-info p {
+            color: var(--cyan);
+            font-size: 0.75rem;
+            margin-bottom: 0;
+            font-style: italic;
+        }
+
+        /* Zoom Icon Badge */
+        .gallery-zoom-icon {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 34px;
+            height: 34px;
+            background: rgba(15, 20, 25, 0.65);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cyan);
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 3;
+            border: 1px solid rgba(64,224,208,0.35);
+        }
+        .gallery-item:hover .gallery-zoom-icon {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        @media (hover: none) {
+            .gallery-zoom-icon {
+                opacity: 1;
+            }
+        }
+
+        /* Link wrapper */
+        .gallery-item-wrapper {
+            text-decoration: none;
+            display: block;
+        }
+
+        /* Fancybox Custom Theme */
+        :root {
+            --f-button-bg: rgba(15, 20, 25, 0.75);
+            --f-button-hover-bg: var(--cyan);
+            --f-button-color: #fff;
+            --f-button-hover-color: #0f1419;
+        }
+
+        /* Mobile: grid 2 kolom */
+        @media (max-width: 575.98px) {
+            #gallery-grid .gallery-card {
+                width: 50%;
+                flex: 0 0 50%;
+                padding: 6px;
+            }
+            #gallery-grid {
+                display: flex;
+                flex-wrap: wrap;
+                margin: 0 -6px;
+            }
+            .gallery-item {
+                border-radius: 12px;
+            }
+            .gallery-info h5 {
+                font-size: 0.75rem;
+            }
+            .gallery-info p {
+                display: none;
+            }
+            .btn-filter {
+                font-size: 0.75rem;
+                padding: 5px 13px;
+            }
+        }
+
+                /* --- DOCUMENTATION SLIDER DARK --- */
         .dokumentasi-wrapper {
             position: relative;
             padding: 0 50px;
@@ -715,13 +960,14 @@
             .hero { padding-top: 120px; text-align: center; }
             .hero-lead { margin-left: auto; margin-right: auto; }
             .navbar-collapse {
-                background: white;
+                background: rgba(15, 20, 25, 0.98);
                 padding: 20px;
                 border-radius: 12px;
-                box-shadow: var(--shadow-hover);
+                border: 1px solid var(--border-color);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
                 margin-top: 10px;
             }
-            .nav-link { margin-left: 0; padding: 10px 0; }
+            .nav-link { color: var(--text-primary) !important; margin-left: 0; padding: 10px 0; }
         }
     </style>
 </head>
@@ -741,50 +987,66 @@
                     <li class="nav-item"><a class="nav-link" href="#hero">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#about">Tentang</a></li>
                     <li class="nav-item"><a class="nav-link" href="#program">Program</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#dokumentasi">Dokumentasi</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#kegiatan_akk">Galeri</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#dokumentasi">Artikel</a></li>
                     <li class="nav-item"><a class="nav-link" href="#gabung">Gabung Volunteer</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Clean Hero Section (ORIGINAL) -->
-    <header id="hero" class="hero">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-                    <span class="badge-soft">Official Website</span>
-                    <h1 class="hero-title">Arti Kata Kita</h1>
-                    <p class="hero-lead">Memanusiakan Manusia dengan cara Manusiawi</p>
-                    <div class="d-flex gap-3 justify-content-start">
-                        <a href="#about" class="btn btn-primary px-4 py-3 rounded-3 fw-bold shadow-lg">Jelajahi Kami</a>
-                        <a href="#program" class="btn btn-outline-light px-4 py-3 rounded-3 fw-bold">Lihat Program</a>
-                    </div>
+    <header id="hero" class="hero-slider-wrapper">
+    <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="hero-slide-bg" style="background-image: url('<?= base_url('assets/img/Background1.JPG') ?>');"></div>
+            </div>
+            <div class="carousel-item">
+                <div class="hero-slide-bg" style="background-image: url('<?= base_url('assets/img/Background2.JPG') ?>');"></div>
+            </div>
+            <div class="carousel-item">
+                <div class="hero-slide-bg" style="background-image: url('<?= base_url('assets/img/Background3.JPG') ?>');"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero-slider-overlay"></div>
+
+    <div class="container hero-content-fixed">
+        <div class="row">
+            <div class="col-lg-8">
+                <span class="badge-soft">Official Website</span>
+                <h1 class="hero-title">Arti Kata Kita</h1>
+                <p class="hero-lead">Memanusiakan Manusia Dengan Cara Manusiawi</p>
+                <div class="d-flex gap-3 justify-content-start">
+                    <a href="#about" class="btn btn-primary px-4 py-3 rounded-3 fw-bold shadow-lg">Jelajahi Kami</a>
+                    <a href="#program" class="btn btn-outline-light px-4 py-3 rounded-3 fw-bold">Lihat Program</a>
                 </div>
             </div>
         </div>
-    </header>
+    </div>
+</header>
 
     <!-- Spacious About Section (DARK THEME) -->
     <section id="about">
-        <div class="container">
-            <div class="row gx-lg-5 align-items-center">
-                <div class="col-lg-6 mb-5 mb-lg-0">
-                    <img src="<?= base_url('assets/img/profil/' . ($profil['foto_sejarah'] ?? 'default.jpg')); ?>" 
-                         class="img-fluid rounded-4 shadow-lg w-75" alt="About Image">
+    <div class="container">
+        <div class="row gx-lg-5 align-items-center">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <img src="<?= base_url('assets/img/profil/' . ($profil['foto_sejarah'] ?? 'default.jpg')); ?>" 
+                     class="img-fluid rounded-4 shadow-lg w-75" alt="About Image">
+            </div>
+            <div class="col-lg-6">
+                <div class="section-header ms-lg-4 mb-4">
+                    <span class="badge-soft">Tentang Kami</span>
+                    <h2 class="mt-3">Sejarah</h2>
                 </div>
-                <div class="col-lg-6">
-                    <div class="section-header ms-lg-4 mb-4">
-                        <span class="badge-soft">Tentang Kami</span>
-                        <h2 class="mt-3">Sejarah</h2>
-                    </div>
-                    <div class="ms-lg-4 text-secondary">
-                        <?= nl2br($profil['sejarah'] ?? 'Konten sejarah belum tersedia.'); ?>
-                    </div>
+                <div class="ms-lg-4 text-secondary" style="text-align: justify;">
+                    <?= nl2br($profil['sejarah'] ?? 'Konten sejarah belum tersedia.'); ?>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- The Code — Fondasi Kita Bersama (setelah Sejarah) -->
     <section id="the-code" style="background: #0a0e13; padding: 70px 0; border-top: 1px solid #1e2530;">
@@ -801,21 +1063,21 @@
                     <div style="background: linear-gradient(135deg, #141920, #0d1117); border: 1px solid #2f3640; border-left: 4px solid var(--yellow); padding: 2rem; border-radius: 0 12px 12px 0; height: 100%; transition: transform .3s;" onmouseenter="this.style.transform='translateY(-4px)'" onmouseleave="this.style.transform='translateY(0)'">
                         <div style="font-size: 1.8rem; margin-bottom: 1rem;">👑</div>
                         <h5 style="color: var(--yellow-bright); font-weight: 700; margin-bottom: .8rem; font-family: 'Poppins', sans-serif;">Etika, Moral & Karakter Adalah Raja</h5>
-                        <p style="color: #7a7d82; font-size: .85rem; line-height: 1.7; margin: 0;">Skill bisa dipelajari kapan saja. Tapi attitude dan karakter adalah harga mati, fondasi dari segalanya. Kami tidak mencari yang paling pintar, tapi yang paling jujur.</p>
+                        <p style="color: #7a7d82; font-size: .85rem; line-height: 1.7; margin: 0; text-align: justify;" >Skill bisa dipelajari kapan saja. Tapi attitude dan karakter adalah harga mati, fondasi dari segalanya. Kami tidak mencari yang paling pintar, tapi yang paling jujur.</p>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div style="background: linear-gradient(135deg, #141920, #0d1117); border: 1px solid #2f3640; border-left: 4px solid var(--cyan); padding: 2rem; border-radius: 0 12px 12px 0; height: 100%; transition: transform .3s;" onmouseenter="this.style.transform='translateY(-4px)'" onmouseleave="this.style.transform='translateY(0)'">
                         <div style="font-size: 1.8rem; margin-bottom: 1rem;">🔍</div>
                         <h5 style="color: #40e0d0; font-weight: 700; margin-bottom: .8rem; font-family: 'Poppins', sans-serif;">Hadir dengan Hati Terbuka</h5>
-                        <p style="color: #7a7d82; font-size: .85rem; line-height: 1.7; margin: 0;">Tidak ada tes, tidak ada persyaratan ketat. Yang dibutuhkan hanya ketulusan untuk hadir dan semangat untuk belajar bersama dalam keberagaman latar belakang.</p>
+                        <p style="color: #7a7d82; font-size: .85rem; line-height: 1.7; margin: 0; text-align: justify;">Tidak ada tes, tidak ada persyaratan ketat. Yang dibutuhkan hanya ketulusan untuk hadir dan semangat untuk belajar bersama dalam keberagaman latar belakang.</p>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div style="background: linear-gradient(135deg, #141920, #0d1117); border: 1px solid #2f3640; border-left: 4px solid #a78bfa; padding: 2rem; border-radius: 0 12px 12px 0; height: 100%; transition: transform .3s;" onmouseenter="this.style.transform='translateY(-4px)'" onmouseleave="this.style.transform='translateY(0)'">
                         <div style="font-size: 1.8rem; margin-bottom: 1rem;">🌱</div>
                         <h5 style="color: #c4b5fd; font-weight: 700; margin-bottom: .8rem; font-family: 'Poppins', sans-serif;">Tumbuh Bersama, Bukan Sendiri</h5>
-                        <p style="color: #7a7d82; font-size: .85rem; line-height: 1.7; margin: 0;">Di AKK, tidak ada yang tertinggal. Setiap langkah pertumbuhan adalah perjalanan kolektif, karena kami percaya kekuatan sejati lahir dari kebersamaan.</p>
+                        <p style="color: #7a7d82; font-size: .85rem; line-height: 1.7; margin: 0; text-align: justify;">Di AKK, tidak ada yang tertinggal. Setiap langkah pertumbuhan adalah perjalanan kolektif, karena kami percaya kekuatan sejati lahir dari kebersamaan.</p>
                     </div>
                 </div>
             </div>
@@ -885,7 +1147,7 @@
                                             </div>
                                             <div class="program-content">
                                                 <h5 class="fw-bold text-primary mb-3"><?= $p['nama_program'] ?></h5>
-                                                <div class="program-description-full">
+                                                <div class="program-description-full text-align: justify;">
                                                     <?= nl2br($p['deskripsi_lengkap']) ?>
                                                 </div>
                                             </div>
@@ -903,19 +1165,96 @@
     </div>
 </section>
 
+<section id="kegiatan_akk" class="py-5" style="background: #0f1419;">
+    <div class="container py-4">
 
+        <div class="text-center mb-5">
+            <span class="badge-soft mb-2">Dokumentasi</span>
+            <h2 class="section-title text-white mt-2">
+                Galeri Kegiatan
+                <span style="background: linear-gradient(135deg, var(--cyan), var(--yellow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">AKK</span>
+            </h2>
+            <p class="mx-auto mt-2" style="color: rgba(255,255,255,0.45); max-width: 560px; font-size: 0.92rem; line-height: 1.7;">
+                Eksplorasi jejak langkah kami melalui berbagai kategori aksi nyata.
+            </p>
+        </div>
+
+        <div class="d-flex justify-content-center flex-wrap gap-2 mb-4">
+            <button class="btn btn-filter active" onclick="filterGallery('all', this)">
+                <i class="fas fa-th me-1"></i> Semua
+            </button>
+            <button class="btn btn-filter" onclick="filterGallery('jogo_kali', this)">
+                Festival Jogo Kali
+            </button>
+            <button class="btn btn-filter" onclick="filterGallery('diskusi_berisix', this)">
+                Diskusi Berisix
+            </button>
+            <button class="btn btn-filter" onclick="filterGallery('JKM', this)">
+                JKM
+            </button>
+            <button class="btn btn-filter" onclick="filterGallery('wayang_godhong', this)">
+                Wayang Godhong
+            </button>
+        </div>
+
+        <div class="row g-3 g-md-4" id="gallery-grid">
+        <?php
+        // Path folder gambar
+        $img_path = 'assets/img/galeri_akk/';
+
+        $galleries = [
+            ['cat' => 'jogo_kali',      'img' => 'jogo kali 3.jpeg', 'title' => 'Festival Jogo Kali #3', 'desc' => 'Grojogan Kapuhan Asha Tirta'],
+            ['cat' => 'diskusi_berisix', 'img' => 'diskusi_brisix1.jpeg', 'title' => 'Diskusi Berisix',    'desc' => 'Pelopor atau Kompor'],
+            ['cat' => 'JKM',             'img' => 'JKM1.jpeg', 'title' => 'Jejaring Kreatif Magelang',          'desc' => 'Meet Up At Ufo Menoreh'],
+            ['cat' => 'wayang_godhong',          'img' => 'wayang_godhong1.jpeg', 'title' => 'Wayang Godhong',    'desc' => 'Kreasi Limbah Plastik Anak-anak SD Kalisalak, Salaman, Magelang'],
+            ['cat' => 'jogo_kali',      'img' => 'Jogo kali4.jpeg', 'title' => 'Festival Jogo Kali #4',      'desc' => 'Tebar Benih Ikan Melem Bersama Bupati Kabupaten Magelang'],
+            ['cat' => 'diskusi_berisix', 'img' => 'diskusi_brisix2.jpeg', 'title' => 'Diskusi Berisix',   'desc' => 'Menggali Akar Spiritual Borobudur dari Desa Kalisalak'],
+            ['cat' => 'JKM',             'img' => 'JKM2.jpeg', 'title' => 'Jejaring Kretif Magelang',   'desc' => 'Meet Up At Satuseket'],
+            ['cat' => 'wayang_godhong',          'img' => 'wayang_godhong2.jpeg', 'title' => 'Wayang Godhong',     'desc' => 'Edukasi melalui seni'],
+            ['cat' => 'jogo_kali', 'img' => 'jogo_kali.jpeg', 'title' => 'Festival Jogo Kali',    'desc' => 'Aksi teatrikal simbol pelestarian sungai'],
+        ];
+
+        foreach ($galleries as $g) : ?>
+            <div class="col-6 col-md-4 gallery-card" data-category="<?= $g['cat'] ?>">
+                <a href="<?= base_url($img_path . $g['img']) ?>"
+                   data-fancybox="gallery"
+                   data-caption="<strong><?= $g['title'] ?></strong> — <?= $g['desc'] ?>"
+                   class="gallery-item-wrapper">
+
+                    <div class="gallery-item">
+                        <img src="<?= base_url($img_path . $g['img']) ?>" alt="<?= $g['title'] ?>" loading="lazy">
+
+                        <div class="gallery-zoom-icon">
+                            <i class="fas fa-expand-alt"></i>
+                        </div>
+
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <span class="cat-tag"><?= str_replace('_', ' ', ucfirst($g['cat'])) ?></span>
+                                <h5><?= $g['title'] ?></h5>
+                                <p><i class="fas fa-search-plus me-1"></i><?= $g['desc'] ?></p>
+                            </div>
+                        </div>
+                    </div>
+
+                </a>
+            </div>
+        <?php endforeach; ?>
+        </div>
+
+    </div>
+</section>
 
     <!-- Modern Documentation Slider (DARK THEME) -->
     <section id="dokumentasi">
         <div class="container">
             <div class="row mb-5 align-items-center">
                  <div class="col-lg-6">
-                    <span class="badge-soft">Galeri</span>
-                    <h2 class="mt-3">Dokumentasi Kegiatan</h2>
+                    <h2 class="mt-0">Artikel</h2>
                 </div>
-                <div class="col-lg-6 text-lg-end d-none d-lg-block">
+                <div class="col-12 col-lg-6 text-lg-end text-center mt-3 mt-lg-0">
                     <a href="<?= base_url('dokumentasi') ?>" class="btn btn-outline-primary rounded-pill px-4 py-2">
-                        <i class="fas fa-th-large me-2"></i>Lihat Semua Dokumentasi
+                        <i class="fas fa-th-large me-2"></i>Lihat Semua Artikel
                     </a>
                 </div>
             </div>
@@ -945,7 +1284,7 @@
                                 </p>
                                 <?php $slug = url_title($doc['judul'], 'dash', true); ?>
                                 <a href="<?= base_url('dokumentasi/'.$doc['id_dokumentasi'].'/'.$slug) ?>" class="btn btn-outline-primary btn-sm rounded-pill w-100">
-                                    Detail Kegiatan
+                                    Detail artikel
                                 </a>
                             </div>
                         </div>
@@ -973,7 +1312,7 @@
                     <h2 style="font-size: 2.5rem; line-height: 1.2; color: #e8eaed; font-weight: 700; margin-bottom: 1rem;">
                         Laboratorium <span style="background: linear-gradient(135deg, var(--cyan), var(--yellow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Kemanusiaan</span>
                     </h2>
-                    <p style="color: #b8babd; line-height: 1.8; font-size: 1rem; margin-bottom: 1.5rem;">
+                    <p style="color: #b8babd; line-height: 1.8; font-size: 1rem; margin-bottom: 1.5rem; text-align: justify;">
                         ArtiKataKita bukan sekadar komunitas biasa. Kami adalah ruang hidup tempat di mana akal sehat, seni, dan kebudayaan dirawat bersama-sama. Berdiri lebih dari 10 tahun, kami percaya bahwa perubahan sejati dimulai dari cara manusia memperlakukan sesama.
                     </p>
                     <div style="margin-top: 2rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
@@ -992,22 +1331,22 @@
                         <div style="background: #141920; border: 1px solid #2f3640; padding: 2rem; border-radius: 12px; border-top: 3px solid var(--yellow); transition: all 0.3s ease;" onmouseenter="this.style.borderColor='var(--yellow)'; this.style.transform='translateY(-4px)'" onmouseleave="this.style.transform='translateY(0)'">
                             <div style="font-size: 2rem; margin-bottom: .8rem;">🧠</div>
                             <h5 style="color: #e8eaed; font-size: .95rem; font-weight: 600; margin-bottom: .5rem;">Napak Bumi</h5>
-                            <p style="color: #7a7d82; font-size: .82rem; line-height: 1.6; margin: 0;">Metodologi observasi partisipan yang mengajak kita turun langsung ke realita sosial untuk belajar dari tanah, bukan dari layar.</p>
+                            <p style="color: #7a7d82; font-size: .82rem; line-height: 1.6; margin: 0; text-align: justify;">Metodologi observasi partisipan yang mengajak kita turun langsung ke realita sosial untuk belajar dari tanah, bukan dari layar.</p>
                         </div>
                         <div style="background: #141920; border: 1px solid #2f3640; padding: 2rem; border-radius: 12px; border-top: 3px solid var(--cyan); transition: all 0.3s ease;" onmouseenter="this.style.transform='translateY(-4px)'" onmouseleave="this.style.transform='translateY(0)'">
                             <div style="font-size: 2rem; margin-bottom: .8rem;">🤝</div>
                             <h5 style="color: #e8eaed; font-size: .95rem; font-weight: 600; margin-bottom: .5rem;">Komunitas Inklusif</h5>
-                            <p style="color: #7a7d82; font-size: .82rem; line-height: 1.6; margin: 0;">Terbuka tanpa syarat latar belakang. Seniman, akademisi, aktivis, kreator ,semua punya tempat di sini.</p>
+                            <p style="color: #7a7d82; font-size: .82rem; line-height: 1.6; margin: 0; text-align: justify;">Terbuka tanpa syarat latar belakang. Seniman, akademisi, aktivis, kreator ,semua punya tempat di sini.</p>
                         </div>
                         <div style="background: #141920; border: 1px solid #2f3640; padding: 2rem; border-radius: 12px; border-top: 3px solid var(--cyan); transition: all 0.3s ease;" onmouseenter="this.style.transform='translateY(-4px)'" onmouseleave="this.style.transform='translateY(0)'">
                             <div style="font-size: 2rem; margin-bottom: .8rem;">🌿</div>
                             <h5 style="color: #e8eaed; font-size: .95rem; font-weight: 600; margin-bottom: .5rem;">Akar Budaya Lokal</h5>
-                            <p style="color: #7a7d82; font-size: .82rem; line-height: 1.6; margin: 0;">Program seperti Wayang Godhong dan Festival Jogo Kali hadir sebagai jembatan antara tradisi dan gerakan masa kini.</p>
+                            <p style="color: #7a7d82; font-size: .82rem; line-height: 1.6; margin: 0; text-align: justify;">Program seperti Wayang Godhong dan Festival Jogo Kali hadir sebagai jembatan antara tradisi dan gerakan masa kini.</p>
                         </div>
                         <div style="background: #141920; border: 1px solid #2f3640; padding: 2rem; border-radius: 12px; border-top: 3px solid var(--yellow); transition: all 0.3s ease;" onmouseenter="this.style.transform='translateY(-4px)'" onmouseleave="this.style.transform='translateY(0)'">
                             <div style="font-size: 2rem; margin-bottom: .8rem;">🎙️</div>
                             <h5 style="color: #e8eaed; font-size: .95rem; font-weight: 600; margin-bottom: .5rem;">Suara yang Didengar</h5>
-                            <p style="color: #7a7d82; font-size: .82rem; line-height: 1.6; margin: 0;">Dari Ngobrol Aja Podcast hingga Diskusi Berisix karena kami percaya setiap cerita layak untuk disuarakan.</p>
+                            <p style="color: #7a7d82; font-size: .82rem; line-height: 1.6; margin: 0; text-align: justify;">Dari Ngobrol Aja Podcast hingga Diskusi Berisix karena kami percaya setiap cerita layak untuk disuarakan.</p>
                         </div>
                     </div>
                 </div>
@@ -1036,19 +1375,20 @@
             </div>
                         -->
             <!-- CTA to Volunteer -->
-            <div class="row">
-                <div class="col-12">
-                    <div style="background: linear-gradient(135deg, #0d1117, #141920); border: 1px solid #2f3640; border-radius: 16px; padding: 3rem; text-align: center; position: relative; overflow: hidden;">
-                        <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--cyan), var(--yellow), var(--cyan));"></div>
-                        <span class="badge-soft" style="margin-bottom: 1.2rem; display: inline-block;">PANGGILAN VOLUNTEER</span>
-                        <h2 style="color: #e8eaed; font-size: 2rem; font-weight: 700; margin-bottom: 1rem;">Sudah Kenal Kami? <span style="background: linear-gradient(135deg, var(--yellow), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Ayo Bergabung!</span></h2>
-                        <p style="color: #7a7d82; max-width: 500px; margin: 0 auto 2rem; line-height: 1.7;">Setelah mengenal kami, kini saatnya kamu menjadi bagian dari perjalanan ini.</p>
-                        <a href="#gabung" class="btn btn-primary px-5 py-3 rounded-3 fw-bold" style="font-size: .95rem; letter-spacing: .5px;" onclick="document.getElementById('gabung').scrollIntoView({behavior:'smooth'}); return false;">
-                            <i class="fas fa-rocket me-2"></i>Gabung Volunteer Sekarang
-                        </a>
-                    </div>
+           <div class="row">
+            <div class="col-12">
+                <div style="background: linear-gradient(135deg, #0d1117, #141920); border: 1px solid #2f3640; border-radius: 16px; padding: 3rem; text-align: center; position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--cyan), var(--yellow), var(--cyan));"></div>
+                    <span class="badge-soft" style="margin-bottom: 1.2rem; display: inline-block;">PANGGILAN VOLUNTEER</span>
+                    <h2 style="color: #e8eaed; font-size: 2rem; font-weight: 700; margin-bottom: 1rem;">Sudah Kenal Kami? <span style="background: linear-gradient(135deg, var(--yellow), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Ayo Bergabung!</span></h2>
+                    <p style="color: #7a7d82; max-width: 500px; margin: 0 auto 2rem; line-height: 1.7;">Setelah mengenal kami, kini saatnya kamu menjadi bagian dari perjalanan ini.</p>
+                    
+                    <a href="https://forms.gle/Ym8QUjYgnYUh54icA" target="_blank" class="btn btn-primary px-5 py-3 rounded-3 fw-bold" style="font-size: .95rem; letter-spacing: .5px;">
+                        <i class="fas fa-rocket me-2"></i>Gabung Volunteer Sekarang
+                    </a>
                 </div>
             </div>
+    </div>
         </div>
     </section>
 
@@ -1081,14 +1421,14 @@
                             <div style="display: flex; gap: 1rem; align-items: flex-start;">
                                 <div style="width: 32px; height: 32px; min-width: 32px; background: linear-gradient(135deg, var(--cyan), var(--yellow)); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #0f1419; font-weight: 700; font-size: .85rem; font-family: 'Poppins', sans-serif;">2</div>
                                 <div>
-                                    <h6 style="color: #e8eaed; margin: 0 0 .3rem;">Dihubungi Tim</h6>
+                                    <h6 style="color: #e8eaed; margin: 0 0 .3rem;">Tim Akan Menghubungi Anda</h6>
                                     <p style="color: #7a7d82; font-size: .82rem; line-height: 1.6; margin: 0;">Tim AKK menghubungimu via WhatsApp untuk orientasi ringan.</p>
                                 </div>
                             </div>
                             <div style="display: flex; gap: 1rem; align-items: flex-start;">
                                 <div style="width: 32px; height: 32px; min-width: 32px; background: linear-gradient(135deg, var(--yellow), var(--cyan)); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #0f1419; font-weight: 700; font-size: .85rem; font-family: 'Poppins', sans-serif;">3</div>
                                 <div>
-                                    <h6 style="color: #e8eaed; margin: 0 0 .3rem;">Onboarding & Hadir</h6>
+                                    <h6 style="color: #e8eaed; margin: 0 0 .3rem;">On boarding & Hadir</h6>
                                     <p style="color: #7a7d82; font-size: .82rem; line-height: 1.6; margin: 0;">Kenalan dengan komunitas, rasakan suasana kegiatan perdanamu.</p>
                                 </div>
                             </div>
@@ -1101,20 +1441,20 @@
                             </div>
                         </div>
                         <div style="margin-top: 2rem; padding: 1.2rem; background: #0f1419; border: 1px solid #2f3640; border-radius: 12px; display: flex; align-items: center; justify-content: space-between;">
-    <div>
-        <p style="font-size: .8rem; color: #7a7d82; line-height: 1.6; margin: 0;">
-            📞 Kontak langsung:<br>
-            <strong style="color: #ffff00;">Zoro (Ridho Agung)</strong>
-        </p>
-    </div>
-    
-    <a href="https://wa.me/628157642627" target="_blank" 
-       style="background: #25D366; color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: 0.3s; box-shadow: 0 4px 10px rgba(37, 211, 102, 0.2);"
-       onmouseover="this.style.transform='scale(1.1)'; this.style.background='#128C7E'" 
-       onmouseout="this.style.transform='scale(1)'; this.style.background='#25D366'">
-        <i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i>
-    </a>
-</div>
+                    <div>
+                        <p style="font-size: .8rem; color: #7a7d82; line-height: 1.6; margin: 0;">
+                            📞 Kontak langsung:<br>
+                            <strong style="color: #ffff00;">Zoro (Ridho Agung)</strong>
+                        </p>
+                    </div>
+                    
+                    <a href="https://wa.me/628157642627" target="_blank" 
+                    style="background: #25D366; color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: 0.3s; box-shadow: 0 4px 10px rgba(37, 211, 102, 0.2);"
+                    onmouseover="this.style.transform='scale(1.1)'; this.style.background='#128C7E'" 
+                    onmouseout="this.style.transform='scale(1)'; this.style.background='#25D366'">
+                        <i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i>
+                    </a>
+                </div>
                     </div>
                 </div>
 
@@ -1229,170 +1569,270 @@
     <footer>
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-lg-3 col-md-12 text-center text-lg-start mb-3 mb-lg-0">
-                <div class="footer-brand-wrapper justify-content-center justify-content-lg-start">
-                    <img src="<?= base_url('assets/img/logo-akk.png'); ?>" alt="AKK" class="footer-brand-img">
-                    <div class="footer-brand-text text-start">
-                        <h5>Arti Kata Kita</h5>
-                        <p>Memanusiakan Manusia Dengan Cara Manusiawi</p>
-                    </div>
-                </div>
+    <div class="col-lg-3 col-md-12 text-center text-lg-start mb-3 mb-lg-0">
+        <div class="footer-brand-wrapper justify-content-center justify-content-lg-start">
+            <img src="<?= base_url('assets/img/logo-akk.png'); ?>" alt="AKK" class="footer-brand-img">
+            <div class="footer-brand-text text-start">
+                <h5>Arti Kata Kita</h5>
+                <p>Memanusiakan Manusia Dengan Cara Manusiawi</p>
             </div>
-
-            <div class="col-lg-3 col-md-12 text-center mb-3 mb-lg-0">
-                <a href="https://www.instagram.com/arti_katakita?igsh=MW1ka3J1ZjhmNWI1MA==" class="social-link-modern"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.youtube.com/@ArtiKataKita" class="social-link-modern"><i class="fab fa-youtube"></i></a>
-            </div>
-
-            <div class="col-lg-3 col-md-12 text-center text-lg-end">
-                <div class="d-flex flex-row flex-wrap justify-content-center justify-content-lg-end gap-2">
-                    <div class="footer-contact-item py-1 px-3 border rounded-pill d-inline-flex align-items-center" style="white-space: nowrap; width: fit-content;">
-                        <i class="fas fa-envelope me-2"></i> 
-                        <a href="mailto:artikatakita9@gmail.com">artikatakita9@gmail.com</a>
-                    </div>
-                </div>
-            </div>
-             <div class="col-lg-3 col-md-12 text-center text-lg-end">
-                <a href="https://wa.me/628157642627" target="_blank" class="footer-contact-item py-1 px-3 border rounded-pill d-inline-flex align-items-center text-decoration-none">
-                    <i class="fab fa-whatsapp"></i> Hubungi Kami
-                </a>
-            </div>
-</div>
-
-<style>
-/* Efek Hover supaya lebih interaktif */
-.footer-contact-item:hover {
-    background-color: #128C7E !important; /* Warna hijau WA lebih gelap saat hover */
-    border-color: #128C7E !important;
-    transform: translateY(-2px); /* Tombol sedikit terangkat */
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-}
-</style>
-        
-        <div class="text-center mt-4 pt-3 border-top opacity-50 small" style="border-color: rgba(255,255,255,0.05);">
-            &copy; <?= date('Y') ?> AKK Community. All Rights Reserved.
         </div>
     </div>
-</footer>
 
-    <!-- Bootstrap Bundle -->
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom Scripts -->
-    <script>
-        // Navbar Glassmorphism Scroll
+    <div class="col-lg-3 col-md-12 text-center mb-3 mb-lg-0">
+        <a href="https://www.instagram.com/arti_katakita?igsh=MW1ka3J1ZjhmNWI1MA==" class="social-link-modern"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.youtube.com/@ArtiKataKita" class="social-link-modern"><i class="fab fa-youtube"></i></a>
+    </div>
+
+    <div class="col-lg-3 col-md-12 text-center text-lg-end mb-2 mb-lg-0">
+        <div class="d-flex justify-content-center justify-content-lg-end">
+            <div class="footer-contact-item py-1 px-3 border rounded-pill d-inline-flex align-items-center" style="white-space: nowrap; width: fit-content;">
+                <i class="fas fa-envelope me-2"></i> artikatakita9@gmail.com
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-12 text-center text-lg-end">
+        <div class="d-flex justify-content-center justify-content-lg-end">
+            <a href="https://wa.me/628157642627" target="_blank" 
+               class="footer-contact-item py-1 px-3 border rounded-pill d-inline-flex align-items-center text-decoration-none text-reset" 
+               style="white-space: nowrap; width: fit-content;">
+                <i class="fab fa-whatsapp me-2 text-success"></i> Hubungi Kami
+            </a>
+        </div>
+    </div>
+</div>
+
+    <style>
+    /* Efek Hover supaya lebih interaktif */
+    .footer-contact-item:hover {
+        background-color: #128C7E !important; /* Warna hijau WA lebih gelap saat hover */
+        border-color: #128C7E !important;
+        transform: translateY(-2px); /* Tombol sedikit terangkat */
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+    }
+    </style>
+            
+            <div class="text-center mt-4 pt-3 border-top opacity-50 small" style="border-color: rgba(255,255,255,0.05);">
+                &copy; <?= date('Y') ?> AKK Community. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+        <!-- Bootstrap Bundle -->
+        <!-- ================================================================
+     GANTI SEMUA SCRIPT GALLERY + NAVBAR + SLIDER
+     (dari <script src="fancybox.umd.js"> sampai </script> terakhir)
+     dengan kode di bawah ini SELURUHNYA
+     ================================================================ -->
+
+        <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+
+        <script>
+        /* ================================================================
+           FANCYBOX CONFIG
+           - Tidak fullscreen (88vw x 88vh)
+           - Tombol < > di kiri & kanan gambar, posisi tengah vertikal
+        ================================================================ */
+        Fancybox.bind("[data-fancybox='gallery']", {
+            Infinite: true,
+            Toolbar: {
+                display: {
+                    left:   ["infobar"],
+                    middle: [],
+                    right:  ["iterateZoom", "close"],
+                },
+            },
+            Images: {
+                Panzoom: { maxScale: 2 },
+            },
+            contentClick: "iterateZoom",
+            showClass: "f-fadeIn",
+            hideClass: "f-fadeOut",
+        });
+
+        /* ================================================================
+           GALLERY FILTER
+        ================================================================ */
+        function filterGallery(category, btn) {
+            // Update active button
+            document.querySelectorAll('.btn-filter').forEach(function(b) {
+                b.classList.remove('active');
+            });
+            if (btn) btn.classList.add('active');
+
+            // Filter cards dengan animasi
+            document.querySelectorAll('.gallery-card').forEach(function(card) {
+                var match = (category === 'all') || (card.getAttribute('data-category') === category);
+                if (match) {
+                    card.style.display = '';
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(12px)';
+                    setTimeout(function() {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 20);
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(12px)';
+                    setTimeout(function() {
+                        card.style.display = 'none';
+                    }, 350);
+                }
+            });
+        }
+
+        /* ================================================================
+           NAVBAR SMOOTH SCROLL KE #gallery (cegah fancybox ikut terbuka)
+        ================================================================ */
+        document.querySelectorAll('.nav-link[href="#gallery"]').forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                var target = document.querySelector('#gallery');
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        /* ================================================================
+           NAVBAR GLASSMORPHISM SCROLL
+        ================================================================ */
         window.addEventListener('scroll', function() {
-            const navbar = document.querySelector('.navbar');
-            const hero = document.querySelector('#hero');
-            
+            var navbar = document.querySelector('.navbar');
+            var hero   = document.querySelector('#hero');
             if (navbar && hero) {
-                const threshold = hero.offsetHeight - navbar.offsetHeight;
-                
-                if (window.scrollY > threshold) {
-                    navbar.classList.add('navbar-scrolled');
-                } else {
-                    navbar.classList.remove('navbar-scrolled');
-                }
-            } else {
-                if (window.scrollY > 50) {
-                    navbar.classList.add('navbar-scrolled');
-                } else {
-                    navbar.classList.remove('navbar-scrolled');
-                }
+                var threshold = hero.offsetHeight - navbar.offsetHeight;
+                navbar.classList.toggle('navbar-scrolled', window.scrollY > threshold);
+            } else if (navbar) {
+                navbar.classList.toggle('navbar-scrolled', window.scrollY > 50);
             }
         });
 
-        // Slider Logic
-        let currentIndex = 0;
-        const sliderTrack = document.getElementById('docSlider');
-        const cards = document.querySelectorAll('.dokumentasi-card');
-        const totalCards = cards.length;
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
+        /* ================================================================
+           DOKUMENTASI SLIDER
+        ================================================================ */
+        (function() {
+            var sliderTrack  = document.getElementById('docSlider');
+            var prevBtn      = document.getElementById('prevBtn');
+            var nextBtn      = document.getElementById('nextBtn');
 
-        function getVisibleCards() {
-            if (window.innerWidth < 768) return 1;
-            if (window.innerWidth < 992) return 2;
-            return 3;
+            if (!sliderTrack) return;
+
+            var docCards   = sliderTrack.querySelectorAll('.dokumentasi-card');
+            var totalDoc   = docCards.length;
+            var slideIndex = 0;
+
+            function getVisible() {
+                if (window.innerWidth < 768) return 1;
+                if (window.innerWidth < 992) return 2;
+                return 3;
+            }
+
+            function runSlider() {
+                var visible       = getVisible();
+                var containerW    = sliderTrack.parentElement.offsetWidth;
+                var gap           = 24;
+                var cardW         = visible === 1
+                                    ? containerW
+                                    : (containerW - gap * (visible - 1)) / visible;
+                var maxIdx        = Math.max(0, totalDoc - visible);
+
+                if (slideIndex > maxIdx) slideIndex = maxIdx;
+                if (slideIndex < 0)      slideIndex = 0;
+
+                sliderTrack.style.transform = 'translateX(-' + (slideIndex * (cardW + gap)) + 'px)';
+
+                if (prevBtn) prevBtn.classList.toggle('disabled', slideIndex <= 0);
+                if (nextBtn) nextBtn.classList.toggle('disabled', slideIndex >= maxIdx);
+            }
+
+            if (prevBtn) {
+                prevBtn.addEventListener('click', function() {
+                    if (slideIndex > 0) { slideIndex--; runSlider(); }
+                });
+            }
+            if (nextBtn) {
+                nextBtn.addEventListener('click', function() {
+                    var maxIdx = totalDoc - getVisible();
+                    if (slideIndex < maxIdx) { slideIndex++; runSlider(); }
+                });
+            }
+
+            /* Touch swipe */
+            var txStart = 0;
+            sliderTrack.addEventListener('touchstart', function(e) {
+                txStart = e.changedTouches[0].screenX;
+            }, { passive: true });
+            sliderTrack.addEventListener('touchend', function(e) {
+                var diff = txStart - e.changedTouches[0].screenX;
+                if (Math.abs(diff) > 50) {
+                    var maxIdx = totalDoc - getVisible();
+                    if (diff > 0 && slideIndex < maxIdx) { slideIndex++; runSlider(); }
+                    if (diff < 0 && slideIndex > 0)       { slideIndex--; runSlider(); }
+                }
+            }, { passive: true });
+
+            runSlider();
+            window.addEventListener('resize', runSlider);
+        })();
+        </script>
+
+        <!-- ================================================================
+             CSS TAMBAHAN — POSISI TOMBOL < > FANCYBOX
+             Tambahkan ini di dalam <style> di <head>
+             (atau letakkan di sini, sebelum </body>)
+        ================================================================ -->
+        <style>
+        /* Tombol prev / next berada di kiri-kanan dalam popup, tengah vertikal */
+        .fancybox__container .fancybox__nav {
+            position: fixed;
+            inset: 0;
+            z-index: 10050;
+            pointer-events: none;
+        }
+        .fancybox__container .fancybox__nav .f-button.is-prev,
+        .fancybox__container .fancybox__nav .f-button.is-next {
+            pointer-events: all;
+            position: absolute !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            width: 46px  !important;
+            height: 46px !important;
+            border-radius: 50% !important;
+            background: rgba(15, 20, 25, 0.78) !important;
+            border: 1.5px solid rgba(64, 224, 208, 0.45) !important;
+            color: #fff !important;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.55) !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            transition: background 0.25s, border-color 0.25s, color 0.25s !important;
+        }
+        .fancybox__container .fancybox__nav .f-button.is-prev {
+            left:  14px !important;
+            right: auto !important;
+        }
+        .fancybox__container .fancybox__nav .f-button.is-next {
+            right: 14px !important;
+            left:  auto !important;
+        }
+        .fancybox__container .fancybox__nav .f-button.is-prev:hover,
+        .fancybox__container .fancybox__nav .f-button.is-next:hover {
+            background: #40E0D0 !important;
+            border-color: #40E0D0 !important;
+            color: #0f1419 !important;
         }
 
-        function updateSlider() {
-            const visible = getVisibleCards();
-            const containerWidth = sliderTrack.parentElement.offsetWidth;
-            const gap = 24;
-            
-            let cardWidth;
-            if (visible === 1) {
-                cardWidth = containerWidth; 
-            } else {
-                cardWidth = (containerWidth - (gap * (visible - 1))) / visible;
+        /* Mobile: tombol sedikit lebih kecil */
+        @media (max-width: 575.98px) {
+            .fancybox__container .fancybox__nav .f-button.is-prev,
+            .fancybox__container .fancybox__nav .f-button.is-next {
+                width:  38px !important;
+                height: 38px !important;
             }
-
-            const maxIndex = Math.max(0, totalCards - visible);
-            
-            if (currentIndex > maxIndex) currentIndex = maxIndex;
-            if (currentIndex < 0) currentIndex = 0;
-            
-            const moveAmount = currentIndex * (cardWidth + gap);
-            sliderTrack.style.transform = `translateX(-${moveAmount}px)`;
-            
-            prevBtn.classList.toggle('disabled', currentIndex <= 0);
-            nextBtn.classList.toggle('disabled', currentIndex >= maxIndex);
+            .fancybox__container .fancybox__nav .f-button.is-prev { left:  8px !important; }
+            .fancybox__container .fancybox__nav .f-button.is-next { right: 8px !important; }
         }
-
-        if(prevBtn) prevBtn.addEventListener('click', () => {
-            if (currentIndex > 0) {
-                currentIndex--;
-                updateSlider();
-            }
-        });
-
-        if(nextBtn) nextBtn.addEventListener('click', () => {
-            const visible = getVisibleCards();
-            const maxIndex = totalCards - visible;
-            if (currentIndex < maxIndex) {
-                currentIndex++;
-                updateSlider();
-            }
-        });
-
-        // Touch Swipe
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        sliderTrack.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-        }, {passive: true});
-
-        sliderTrack.addEventListener('touchend', e => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        }, {passive: true});
-
-        function handleSwipe() {
-            const threshold = 50;
-            if (touchEndX < touchStartX - threshold) {
-                const visible = getVisibleCards();
-                if (currentIndex < totalCards - visible) {
-                    currentIndex++;
-                    updateSlider();
-                }
-            }
-            if (touchEndX > touchStartX + threshold) {
-                if (currentIndex > 0) {
-                    currentIndex--;
-                    updateSlider();
-                }
-            }
-        }
-
-        // Init slider on load
-        updateSlider();
-
-        // Re-calculate on resize
-        window.addEventListener('resize', () => {
-            updateSlider();
-        });
-
-    </script>
-
+        </style>
