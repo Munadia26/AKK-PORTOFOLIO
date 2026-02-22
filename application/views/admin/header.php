@@ -363,7 +363,7 @@
         </a>
         
         <a href="<?= base_url('portfolio/dokumentasi'); ?>" class="nav-link <?= ($segment == 'dokumentasi') ? 'active' : ''; ?>">
-            <i class="fa-solid fa-images"></i> Dokumentasi
+            <i class="fa-solid fa-newspaper"></i> Artikel
         </a>
 
         <div class="menu-label">System</div>

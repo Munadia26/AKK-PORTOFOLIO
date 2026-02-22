@@ -16,6 +16,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
+         html {
+    scroll-behavior: smooth;
+    }
+
+    /* Ini akan memberikan ruang agar header galeri tidak tertutup navbar */
+    #kegiatan-akk {
+        scroll-margin-top: 100px; 
+    }
         :root {
             /* AKK Brand Colors */
             --cyan: #40E0D0;
@@ -111,52 +119,80 @@
         }
         .btn-login:hover { background-color: #3DD4C4; transform: translateY(-1px); box-shadow: var(--shadow-hover); }
 
-        /* --- HERO SECTION (Same as Home) --- */
-        .detail-hero {
-            position: relative;
-            padding: 140px 0 80px;
-            background: url('<?= base_url('assets/img/background2.jpeg') ?>') center/cover no-repeat fixed;
-            min-height: 350px;
-            display: flex;
-            align-items: center;
-            color: white;
-        }
-        
-        .detail-hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to right, rgba(44, 62, 80, 0.95) 0%, rgba(64, 224, 208, 0.4) 100%);
-            z-index: 1;
-        }
-        
-        .detail-hero .container { position: relative; z-index: 2; }
-        
-        .badge-soft {
-            background-color: var(--yellow);
-            color: var(--dark);
-            padding: 6px 16px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 1rem;
-            display: inline-block;
-            border: 1px solid rgba(255, 215, 0, 0.3);
-        }
+        /* --- DETAIL HERO SECTION (Updated for Slider) --- */
+.detail-hero {
+    position: relative;
+    padding: 140px 0 80px;
+    min-height: 350px;
+    display: flex;
+    align-items: center;
+    color: white;
+    overflow: hidden; /* Penting agar slide tidak keluar jalur */
+    background: #2c3e50; /* Fallback color */
+}
 
-        .breadcrumb-custom {
-            display: flex;
-            gap: 8px;
-            font-size: 0.85rem;
-            margin-bottom: 1rem;
-            opacity: 0.8;
-        }
-        .breadcrumb-custom a { color: white; opacity: 0.7; }
-        .breadcrumb-custom a:hover { opacity: 1; color: var(--yellow); }
-        .breadcrumb-separator { opacity: 0.4; }
+/* Mengatur Slider Latar Belakang */
+.detail-hero #detailHeroCarousel {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
 
+.detail-hero .carousel-inner,
+.detail-hero .carousel-item,
+.detail-hero .hero-slide-bg {
+    height: 100%;
+    width: 100%;
+}
+
+.detail-hero .hero-slide-bg {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* Tetap menggunakan fixed jika diinginkan, namun scroll lebih aman untuk slider */
+    background-attachment: scroll; 
+}
+
+/* Overlay Gradient (Menggantikan ::before) */
+.hero-slider-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(44, 62, 80, 0.95) 0%, rgba(64, 224, 208, 0.4) 100%);
+    z-index: 2;
+}
+
+/* Memastikan Konten berada di atas slider & overlay */
+.detail-hero .container { 
+    position: relative; 
+    z-index: 3; 
+}
+
+/* Style Badge & Breadcrumb Tetap Sesuai Permintaan */
+.badge-soft {
+    background-color: var(--yellow);
+    color: var(--dark);
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+    display: inline-block;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.breadcrumb-custom {
+    display: flex;
+    gap: 8px;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+}
+.breadcrumb-custom a { color: white; opacity: 0.7; text-decoration: none; transition: 0.3s; }
+.breadcrumb-custom a:hover { opacity: 1; color: var(--yellow); }
+.breadcrumb-separator { opacity: 0.4; }
+.breadcrumb-custom .current { color: var(--cyan); opacity: 1; }
         /* --- DARK CONTENT SECTION --- */
         .main-content { 
             padding: 80px 0; 
@@ -489,31 +525,47 @@
                     <li class="nav-item"><a class="nav-link" href="<?= base_url() ?>#hero">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= base_url() ?>#about">Tentang</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= base_url() ?>#program">Program</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="<?= base_url('dokumentasi') ?>">Dokumentasi</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= base_url() ?>#kegiatan-akk">Galeri</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="<?= base_url('dokumentasi') ?>">Artikel</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= base_url() ?>#gabung">Gabung Volunteer</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Detail Hero Section -->
-    <header class="detail-hero" id="hero">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 fade-in-up">
-                    <div class="breadcrumb-custom">
-                        <a href="<?= base_url() ?>">Home</a>
-                        <span class="breadcrumb-separator">/</span>
-                        <a href="<?= base_url() ?>#dokumentasi">Dokumentasi</a>
-                        <span class="breadcrumb-separator">/</span>
-                        <span>Detail Kegiatan</span>
-                    </div>
-                    <span class="badge-soft"><?= $doc['kategori'] ?></span>
-                    <h1 class="display-4 fw-bold text-white mb-0"><?= $doc['judul'] ?></h1>
-                </div>
+    <header class="detail-hero hero-slider-wrapper" id="hero">
+    <div id="detailHeroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="hero-slide-bg" style="background-image: url('<?= base_url('assets/img/Background1.JPG') ?>');"></div>
+            </div>
+            <div class="carousel-item">
+                <div class="hero-slide-bg" style="background-image: url('<?= base_url('assets/img/Background2.JPG') ?>');"></div>
+            </div>
+            <div class="carousel-item">
+                <div class="hero-slide-bg" style="background-image: url('<?= base_url('assets/img/Background3.JPG') ?>');"></div>
             </div>
         </div>
-    </header>
+    </div>
+
+    <div class="hero-slider-overlay"></div>
+
+    <div class="container hero-content-fixed">
+        <div class="row">
+            <div class="col-lg-10 fade-in-up">
+                <div class="breadcrumb-custom">
+                    <a href="<?= base_url() ?>">Home</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <a href="<?= base_url() ?>#dokumentasi">Artikel</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <span class="current">Detail Artikel</span>
+                </div>
+                <span class="badge-soft"><?= $doc['kategori'] ?></span>
+                <h1 class="display-4 fw-bold text-white mb-0" style="text-shadow: 2px 2px 10px rgba(0,0,0,0.5);"><?= $doc['judul'] ?></h1>
+            </div>
+        </div>
+    </div>
+</header>
 
     <!-- Main Content Section -->
     <main class="main-content">
@@ -539,13 +591,13 @@
                                  onerror="this.src='https://via.placeholder.com/1200x600?text=No+Image'">
                         </div>
                         
-                        <div class="content-body">
+                        <div class="content-body" style="text-align: justify;">
                             <?= nl2br($doc['deskripsi']) ?>
                         </div>
                         
                         <div class="mt-5 pt-4 border-top d-flex justify-content-between align-items-center" style="border-color: var(--border-color) !important;">
                             <a href="<?= base_url() ?>#dokumentasi" class="btn btn-outline-primary rounded-pill px-4">
-                                <i class="fas fa-arrow-left me-2"></i> Kembali ke Galeri
+                                <i class="fas fa-arrow-left me-2"></i> Kembali ke Home
                             </a>
                             
                         </div>
@@ -557,8 +609,8 @@
                     <div class="sidebar-sticky fade-in-up" style="animation-delay: 0.2s;">
                         <div class="sidebar-card">
                             <h5 class="sidebar-title">
-                                <i class="fas fa-images"></i> 
-                                Dokumentasi Lain
+                                <i class="fa-solid fa-newspaper"></i> 
+                                Artikel Lain
                             </h5>
                             
                             <div class="recommendation-list">

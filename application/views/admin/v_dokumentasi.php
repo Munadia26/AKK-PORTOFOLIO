@@ -8,11 +8,11 @@
                 <div class="col-md-7">
                     <div class="d-flex align-items-center">
                         <div class="icon-box me-3" style="background: rgba(255, 215, 0, 0.1); padding: 12px; border-radius: 15px; box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);">
-                            <i class="fas fa-images fa-lg" style="color: var(--yellow-bright);"></i>
+                            <i class="fa-solid fa-newspaper" style="color: var(--yellow-bright);"></i>
                         </div>
                         <div>
-                            <h3 class="fw-bold mb-0" style="color: var(--text-primary);">Manajemen Dokumentasi</h3>
-                            <p class="small mb-0" style="color: var(--text-secondary);">Kelola galeri kegiatan dan momen penting komunitas Arti Kata Kita.</p>
+                            <h3 class="fw-bold mb-0" style="color: var(--text-primary);">Manajemen Artikel</h3>
+                            <p class="small mb-0" style="color: var(--text-secondary);">Kelola Artikel komunitas Arti Kata Kita.</p>
                         </div>
                     </div>
                 </div>
@@ -20,7 +20,7 @@
                     <button class="btn px-4 shadow-sm fw-bold" 
                             style="background: linear-gradient(135deg, var(--yellow), var(--yellow-bright)); color: var(--dark-bg); border-radius: 12px; border: none; padding: 12px 25px; transition: all 0.3s ease;" 
                             data-bs-toggle="modal" data-bs-target="#addDoc">
-                        <i class="fas fa-plus-circle me-2"></i> Tambah Dokumentasi
+                        <i class="fas fa-plus-circle me-2"></i> Tambah Artikel
                     </button>
                 </div>
             </div>
@@ -74,7 +74,7 @@
                                 </button>
                                 <a href="<?= base_url('portfolio/hapus_dokumentasi/'.$d['id_dokumentasi']) ?>" 
                                    class="btn-action delete" 
-                                   onclick="return confirm('Apakah Anda yakin ingin menghapus dokumentasi ini?')">
+                                   onclick="return confirm('Apakah Anda yakin ingin menghapus Artikel ini?')">
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </div>
@@ -154,14 +154,14 @@
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <form action="<?= base_url('portfolio/tambah_dokumentasi') ?>" method="post" enctype="multipart/form-data" class="modal-content border-0 shadow-lg" style="border-radius: 25px; background: var(--dark-card); border: 1px solid var(--border-color);">
             <div class="modal-header border-0 p-4 pb-0" style="border-bottom: 1px solid var(--border-color) !important;">
-                <h5 class="modal-title fw-bold" style="color: var(--yellow-bright);"><i class="fas fa-plus-circle me-2"></i> Tambah Dokumentasi</h5>
+                <h5 class="modal-title fw-bold" style="color: var(--yellow-bright);"><i class="fas fa-plus-circle me-2"></i> Tambah Artikel</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter: brightness(2);"></button>
             </div>
             <div class="modal-body p-4">
                 <div class="row g-4">
                     <div class="col-md-7">
                         <div class="mb-3">
-                            <label class="form-label small fw-bold" style="color: #F3F4F6;">Judul Dokumentasi</label>
+                            <label class="form-label small fw-bold" style="color: #F3F4F6;">Judul Artikel</label>
                             <input type="text" name="judul" class="form-control akk-input" placeholder="Masukkan judul..." required>
                         </div>
                         <div class="mb-3">

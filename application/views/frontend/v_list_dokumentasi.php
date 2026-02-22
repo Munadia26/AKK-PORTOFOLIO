@@ -14,6 +14,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
+        html {
+    scroll-behavior: smooth;
+    }
+
+    /* Ini akan memberikan ruang agar header galeri tidak tertutup navbar */
+    #kegiatan-akk {
+        scroll-margin-top: 100px; 
+    }
         :root {
             --cyan: #40E0D0;
             --cyan-light: #5FFAF0;
@@ -67,44 +75,94 @@
             .nav-link { color: var(--text-primary) !important; margin-left: 0; padding: 10px 0; border-bottom: 1px solid var(--border-color); }
             .nav-link:last-child { border-bottom: none; }
         }
+         html {
+            scroll-behavior: smooth;
+        }
+        #gallery {
+            scroll-margin-top: 100px;
+        }
 
         /* ── HERO ── */
-        .list-hero {
-            position: relative;
-            padding: 140px 0 90px;
-            background: url('<?= base_url("assets/img/background2.jpeg") ?>') center/cover no-repeat fixed;
-            min-height: 380px;
-            display: flex;
-            align-items: center;
-        }
-        .list-hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(15,20,25,.95) 0%, rgba(44,62,80,.85) 50%, rgba(64,224,208,.25) 100%);
-            z-index: 1;
-        }
-        .list-hero .container { position: relative; z-index: 2; }
+        /* Penyesuaian list-hero untuk Slider Otomatis */
+                .list-hero {
+                    position: relative;
+                    padding: 140px 0 90px;
+                    min-height: 450px; /* Sedikit ditambah agar proporsional dengan slider */
+                    display: flex;
+                    align-items: center;
+                    overflow: hidden; /* Penting agar slide tidak tumpah keluar */
+                    background: #0f1419; /* Warna dasar saat gambar loading */
+                }
 
-        .badge-hero {
-            display: inline-block;
-            background: rgba(255,215,0,.15);
-            border: 1px solid rgba(255,215,0,.4);
-            color: var(--yellow-bright);
-            font-size: .72rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            padding: .35rem 1rem;
-            border-radius: 50px;
-            margin-bottom: 1.2rem;
-        }
+                /* Container untuk Carousel Background */
+                .list-hero #heroCarousel {
+                    position: absolute;
+                    inset: 0;
+                    z-index: 1;
+                }
 
-        .breadcrumb-custom { display: flex; gap: 8px; font-size: .83rem; margin-bottom: 1rem; align-items: center; }
-        .breadcrumb-custom a { color: rgba(255,255,255,.6); }
-        .breadcrumb-custom a:hover { color: var(--yellow); }
-        .breadcrumb-custom .sep { color: rgba(255,255,255,.3); }
-        .breadcrumb-custom .current { color: rgba(255,255,255,.85); }
+                .list-hero .carousel-inner, 
+                .list-hero .carousel-item, 
+                .list-hero .hero-slide-bg {
+                    height: 100%;
+                    width: 100%;
+                }
+
+                .list-hero .hero-slide-bg {
+                    background-position: center;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    /* Efek parallax fixed tetap dipertahankan jika browser mendukung */
+                    background-attachment: scroll; 
+                }
+
+                /* Overlay menggantikan ::before yang lama */
+                .hero-slider-overlay {
+                    position: absolute;
+                    inset: 0;
+                    background: linear-gradient(135deg, rgba(15,20,25,.95) 0%, rgba(44,62,80,.85) 50%, rgba(64,224,208,.25) 100%);
+                    z-index: 2;
+                }
+
+                /* Memastikan konten teks berada di paling depan */
+                .list-hero .container { 
+                    position: relative; 
+                    z-index: 3; 
+                }
+
+                /* Style Badge & Breadcrumb (Tetap Sama) */
+                .badge-hero {
+                    display: inline-block;
+                    background: rgba(255,215,0,.15);
+                    border: 1px solid rgba(255,215,0,.4);
+                    color: var(--yellow-bright);
+                    font-size: .72rem;
+                    font-weight: 600;
+                    letter-spacing: 2px;
+                    text-transform: uppercase;
+                    padding: .35rem 1rem;
+                    border-radius: 50px;
+                    margin-bottom: 1.2rem;
+                }
+
+                .breadcrumb-custom { 
+                    display: flex; 
+                    gap: 8px; 
+                    font-size: .83rem; 
+                    margin-bottom: 1rem; 
+                    align-items: center; 
+                }
+                .breadcrumb-custom a { color: rgba(255,255,255,.6); text-decoration: none; transition: 0.3s; }
+                .breadcrumb-custom a:hover { color: var(--yellow); }
+                .breadcrumb-custom .sep { color: rgba(255,255,255,.3); }
+                .breadcrumb-custom .current { color: rgba(255,255,255,.85); }
+
+                /* Tambahan untuk Search Box agar rapi di atas slider */
+                .search-box-wrapper {
+                    margin-top: 1.5rem;
+                    position: relative;
+                    max-width: 600px;
+                }
 
         /* ── SEARCH BOX ── */
         .search-box-wrapper {
@@ -435,34 +493,49 @@
                 <li class="nav-item"><a class="nav-link" href="<?= base_url() ?>#hero">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="<?= base_url() ?>#about">Tentang</a></li>
                 <li class="nav-item"><a class="nav-link" href="<?= base_url() ?>#program">Program</a></li>
-                <li class="nav-item"><a class="nav-link active" href="<?= base_url('dokumentasi') ?>">Dokumentasi</a></li>
+                <li class="nav-item"><a class="nav-link" href="<?= base_url() ?>#kegiatan-akk">Galeri</a></li>
+                <li class="nav-item"><a class="nav-link active" href="<?= base_url('dokumentasi') ?>">Artikel</a></li>
                 <li class="nav-item"><a class="nav-link" href="<?= base_url() ?>#gabung">Gabung Volunteer</a></li>
             </ul>
         </div>
     </div>
 </nav>
+<header id="hero" class="list-hero hero-slider-wrapper">
+    <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="hero-slide-bg" style="background-image: url('<?= base_url('assets/img/Background1.JPG') ?>');"></div>
+            </div>
+            <div class="carousel-item">
+                <div class="hero-slide-bg" style="background-image: url('<?= base_url('assets/img/Background2.JPG') ?>');"></div>
+            </div>
+            <div class="carousel-item">
+                <div class="hero-slide-bg" style="background-image: url('<?= base_url('assets/img/Background3.JPG') ?>');"></div>
+            </div>
+        </div>
+    </div>
 
-<!-- HERO -->
-<header class="list-hero">
-    <div class="container">
+    <div class="hero-slider-overlay"></div>
+
+    <div class="container hero-content-fixed">
         <div class="breadcrumb-custom fade-up">
             <a href="<?= base_url() ?>">Home</a>
             <span class="sep">/</span>
-            <span class="current">Dokumentasi</span>
+            <span class="current">Artikel</span>
         </div>
-        <div class="badge-hero fade-up">📸 Galeri Kegiatan</div>
+        
         <h1 class="display-4 fw-bold text-white mb-2 fade-up" style="max-width: 700px; line-height: 1.15;">
-            Dokumentasi <span style="background: linear-gradient(135deg, var(--cyan), var(--yellow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Kegiatan AKK</span>
+            Artikel <span style="background: linear-gradient(135deg, var(--cyan), var(--yellow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">AKK</span>
         </h1>
-        <p class="fade-up" style="color: rgba(255,255,255,.7); font-size: 1.05rem; max-width: 520px; line-height: 1.7;">
-            Rekam jejak setiap perjalanan — dari lapangan, panggung seni, hingga ruang diskusi yang mengubah pandangan.
+        
+        <p class="fade-up" style="color: rgba(255,255,255,.9); font-size: 1.05rem; max-width: 520px; line-height: 1.7;">
+           Menjelajahi sisi kemanusiaan melalui tulisan. Temukan kumpulan artikel, refleksi, dan kisah inspiratif tentang cara kita memanusiakan manusia di kehidupan sehari-hari.
         </p>
 
-        <!-- Search Box in Hero -->
         <div class="search-box-wrapper fade-up">
             <form method="GET" action="<?= base_url('dokumentasi') ?>">
                 <div class="search-box">
-                    <input type="text" name="q" placeholder="Cari dokumentasi kegiatan..."
+                    <input type="text" name="q" placeholder="Cari Artikel..."
                            value="<?= htmlspecialchars($search ?? '') ?>" autocomplete="off">
                     <button type="submit">
                         <i class="fas fa-search"></i> Cari
@@ -471,9 +544,9 @@
             </form>
         </div>
 
-        <div class="hero-stats fade-up">
-            <div class="hero-stat"><i class="fas fa-images" style="color: var(--yellow);"></i> <strong><?= count($dokumentasi) ?></strong> total dokumentasi</div>
-            <div class="hero-stat"><i class="fas fa-calendar-alt" style="color: var(--cyan);"></i> Diperbarui secara berkala</div>
+        <div class="hero-stats fade-up mt-4">
+            <div class="hero-stat text-white"><i class="fas fa-images" style="color: var(--yellow);"></i> <strong><?= count($dokumentasi) ?></strong> total Artikel</div>
+            <div class="hero-stat text-white"><i class="fas fa-calendar-alt" style="color: var(--cyan);"></i> Diperbarui secara berkala</div>
         </div>
     </div>
 </header>
@@ -490,7 +563,7 @@
                     — ditemukan <strong><?= count($dokumentasi) ?></strong> hasil
                     &nbsp;<a href="<?= base_url('dokumentasi') ?>" style="color: var(--cyan); font-size: .82rem;"><i class="fas fa-times-circle me-1"></i>Hapus filter</a>
                 <?php else: ?>
-                    Menampilkan <strong><?= count($dokumentasi) ?></strong> dokumentasi
+                    Menampilkan <strong><?= count($dokumentasi) ?></strong> Artikel
                 <?php endif; ?>
             </div>
             <div class="filter-tags">
@@ -512,8 +585,8 @@
         <div class="doc-grid">
             <div class="empty-state">
                 <div class="empty-icon">🔍</div>
-                <h4>Dokumentasi Tidak Ditemukan</h4>
-                <p>Coba kata kunci lain atau hapus filter untuk melihat semua dokumentasi.</p>
+                <h4>Artikel Tidak Ditemukan</h4>
+                <p>Coba kata kunci lain atau hapus filter untuk melihat semua Artikel.</p>
                 <a href="<?= base_url('dokumentasi') ?>" class="btn mt-3" style="background: linear-gradient(135deg, var(--cyan), var(--yellow)); color: var(--dark-bg); border-radius: 8px; padding: .7rem 1.8rem; font-weight: 600;">
                     Lihat Semua
                 </a>
