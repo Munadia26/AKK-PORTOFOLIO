@@ -731,6 +731,7 @@
             display: flex;
             transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
             gap: 24px;
+            align-items: stretch; /* semua card ikuti tinggi tertinggi */
         }
 
         .dokumentasi-card {
@@ -741,11 +742,11 @@
             box-shadow: var(--shadow-dark-subtle);
             overflow: hidden;
             transition: all 0.3s ease;
-            height: 100%;
             display: flex;
-            flex-direction: column;
+            flex-direction: column; /* penting: isi card susun vertikal */
             border: 1px solid var(--border-color);
             position: relative;
+            /* HAPUS height: 100% atau height apapun */
         }
 
         .dokumentasi-card::before {
@@ -1278,10 +1279,22 @@
                             </div>
                             <div class="p-4 d-flex flex-column flex-grow-1">
                                 <span class="text-primary fw-bold small text-uppercase mb-2"><?= $doc['kategori'] ?></span>
-                                <h5 class="fw-bold mb-3"><?= $doc['judul'] ?></h5>
+                                <h5 class="fw-bold mb-3 text-jutify"><?= $doc['judul'] ?></h5>
                                 <p class="text-secondary small mb-3 flex-grow-1" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
                                     <?= strip_tags($doc['deskripsi']) ?>
                                 </p>
+                                <!-- Info Penulis -->
+                                <div class="d-flex align-items-center gap-2 mb-3 pt-2" style="border-top: 1px solid var(--border-color);">
+                                    <div style="width:28px; height:28px; border-radius:50%; background:linear-gradient(135deg,rgba(255,215,0,.12),rgba(64,224,208,.12)); border:1.5px solid rgba(255,215,0,.3); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                                        <i class="fas fa-user" style="font-size:.6rem; color:var(--yellow-bright);"></i>
+                                    </div>
+                                    <div style="line-height:1.2; min-width:0;">
+                                        <div style="font-size:.58rem; text-transform:uppercase; letter-spacing:.5px; color:var(--text-muted);">Oleh</div>
+                                        <div style="font-size:.78rem; font-weight:600; color:var(--text-secondary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                                            <?= !empty($doc['penulis']) ? htmlspecialchars($doc['penulis']) : 'Tim AKK' ?>
+                                        </div>
+                                    </div>
+                                </div>
                                 <?php $slug = url_title($doc['judul'], 'dash', true); ?>
                                 <a href="<?= base_url('dokumentasi/'.$doc['id_dokumentasi'].'/'.$slug) ?>" class="btn btn-outline-primary btn-sm rounded-pill w-100">
                                     Detail artikel
