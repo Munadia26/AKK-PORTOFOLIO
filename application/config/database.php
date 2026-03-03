@@ -75,9 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
     'dsn'   => '',
-    'hostname' => 'localhost',
+    'hostname' => '127.0.0.1',
+    'port'     => 8889,
     'username' => 'root',        // UBAH INI: Tambahkan kata root
-    'password' => '',            // Biarkan kosong jika pakai XAMPP standar
+    'password' => 'root',            // Biarkan kosong jika pakai XAMPP standar
     'database' => 'portofolio_akk',
     'dbdriver' => 'mysqli',
     'dbprefix' => '',

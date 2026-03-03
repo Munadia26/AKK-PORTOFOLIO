@@ -18,6 +18,7 @@ class Portfolio extends CI_Controller {
         // Mengambil dokumentasi diurutkan dari yang terbaru
         $this->db->order_by('tgl_upload', 'DESC');
         $data['dokumentasi'] = $this->M_data->get_data('dokumentasi')->result_array(); 
+        $data['show_popup'] = $this->config->item('show_popup');
         $this->load->view('frontend/v_home', $data);
     }
 

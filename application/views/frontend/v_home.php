@@ -1849,3 +1849,55 @@
             .fancybox__container .fancybox__nav .f-button.is-next { right: 8px !important; }
         }
         </style>
+
+    <!-- Popup Announcement Modal -->
+    <?php if ($show_popup): ?>
+    <div class="modal fade" id="announcementModal" tabindex="-1" aria-labelledby="announcementModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 500px; width: 90%; margin: 1.75rem auto;">
+            <div class="modal-content border-0 bg-transparent">
+                <div class="modal-body p-0 position-relative">
+                    <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3 z-3 shadow-none" data-bs-dismiss="modal" aria-label="Close" style="background-color: rgba(0,0,0,0.5); border-radius: 50%; padding: 0.75rem; opacity: 1;"></button>
+                    <div class="announcement-card overflow-hidden rounded-4 shadow-lg border border-opacity-10 border-white d-flex flex-column mx-auto" style="max-height: 90vh; background: var(--dark-bg); width: 100%;">
+                        <div id="announcementCarousel" class="carousel slide" data-bs-ride="carousel" style="overflow: hidden;">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#announcementCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#announcementCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            </div>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active text-center">
+                                    <img src="<?= base_url('assets/img/1.png') ?>" class="img-fluid" alt="Announcement 1" style="max-height: calc(90vh - 80px); width: auto; object-fit: contain;">
+                                </div>
+                                <div class="carousel-item text-center">
+                                    <img src="<?= base_url('assets/img/2.png') ?>" class="img-fluid" alt="Announcement 2" style="max-height: calc(90vh - 80px); width: auto; object-fit: contain;">
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#announcementCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#announcementCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                        <div class="announcement-content py-3 text-center w-100" style="background: rgba(15, 20, 25, 0.95); flex-shrink: 0;">
+                            <button type="button" class="btn btn-cyan px-5 py-2 fw-semibold rounded-pill" data-bs-dismiss="modal" style="background-color: var(--cyan); color: var(--dark-bg); border: none; box-shadow: 0 0 20px rgba(64, 224, 208, 0.4);">
+                                Mengerti
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var announcementModal = new bootstrap.Modal(document.getElementById('announcementModal'));
+            announcementModal.show();
+        });
+    </script>
+    <?php endif; ?>
+
+</body>
+</html>
