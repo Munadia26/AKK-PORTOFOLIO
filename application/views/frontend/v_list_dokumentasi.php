@@ -609,6 +609,14 @@
                 </div>
                 <div class="doc-body">
                     <h5 class="doc-title"><?= htmlspecialchars($doc['judul']) ?></h5>
+                    <?php if(!empty($doc['subtittle'])): ?>
+                    <p class="doc-subtitle" style="font-size: .78rem; color: var(--yellow-bright); margin-bottom: .6rem; font-style: italic; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden;"><?= htmlspecialchars($doc['subtittle']) ?></p>
+                    <?php endif; ?>
+                    <?php if(!empty($doc['penulis'])): ?>
+                    <p style="font-size: .75rem; color: var(--text-muted); margin-bottom: .6rem;">
+                        <i class="fas fa-user-pen me-1" style="color: var(--yellow); opacity:0.7;"></i> <?= htmlspecialchars($doc['penulis']) ?>
+                    </p>
+                    <?php endif; ?>
                     <p class="doc-desc"><?= strip_tags($doc['deskripsi']) ?></p>
                     <a href="<?= base_url('dokumentasi/'.$doc['id_dokumentasi'].'/'.$slug) ?>" class="doc-btn">
                         <i class="fas fa-eye"></i> Lihat Detail
@@ -662,7 +670,7 @@
             </div>
             <div class="col-lg-3 col-md-12 text-center text-lg-end mb-2 mb-lg-0">
             <div class="footer-contact-item py-1 px-3 border rounded-pill d-inline-flex align-items-center">
-                <i class="fas fa-envelope me-2"></i> artikatakita9@gmail.com
+                <i class="fas fa-envelope me-2"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3d5c4f4954565c495c5654495c047d5a505c5451135e5250">[email&#160;protected]</a>
             </div>
              </div>
             <div class="col-lg-3 col-md-12 text-center text-lg-end">
@@ -677,7 +685,7 @@
     </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     // Navbar scroll
     window.addEventListener('scroll', function() {

@@ -214,10 +214,13 @@ class Portfolio extends CI_Controller {
         }
 
         $data = [
-            'judul' => $this->input->post('judul'),
-            'kategori' => $this->input->post('kategori'),
-            'deskripsi' => $this->input->post('deskripsi'),
-            'foto' => $foto
+            'judul'      => $this->input->post('judul'),
+            'subtittle'  => $this->input->post('subtittle'),
+            'penulis'    => $this->input->post('penulis'),
+            'tgl_artikel'=> $this->input->post('tgl_artikel'),
+            'kategori'   => $this->input->post('kategori'),
+            'deskripsi'  => $this->input->post('deskripsi'),
+            'foto'       => $foto
         ];
 
         $this->M_data->insert_data('dokumentasi', $data);
@@ -228,9 +231,12 @@ class Portfolio extends CI_Controller {
     public function update_dokumentasi() {
         $id = $this->input->post('id_dokumentasi');
         $data = [
-            'judul' => $this->input->post('judul'),
-            'kategori' => $this->input->post('kategori'),
-            'deskripsi' => $this->input->post('deskripsi')
+            'judul'      => $this->input->post('judul'),
+            'subtittle'  => $this->input->post('subtittle'),
+            'penulis'    => $this->input->post('penulis'),
+            'tgl_artikel'=> $this->input->post('tgl_artikel'),
+            'kategori'   => $this->input->post('kategori'),
+            'deskripsi'  => $this->input->post('deskripsi')
         ];
 
         if (!empty($_FILES['foto']['name'])) {
