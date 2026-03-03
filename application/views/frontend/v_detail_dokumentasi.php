@@ -626,7 +626,7 @@
             <div class="col-lg-3 col-md-12 text-center text-lg-end mb-2 mb-lg-0">
                 <div class="footer-contact-item py-1 px-3 border rounded-pill d-inline-flex align-items-center">
                     <i class="fas fa-envelope me-2"></i>
-                    <a href="/cdn-cgi/l/email-protection#61001315080a0015000a0815005821060c00080d4f020e0c" style="color:inherit;"><span class="__cf_email__" data-cfemail="d6b7a4a2bfbdb7a2b7bdbfa2b7ef96b1bbb7bfbaf8b5b9bb">[email&#160;protected]</span></a>
+                    <a href="/cdn-cgi/l/email-protection#61001315080a0015000a0815005821060c00080d4f020e0c" style="color:inherit;"><span class="__cf_email__" data-cfemail="d6b7a4a2bfbdb7a2b7bdbfa2b7ef96b1bbb7bfbaf8b5b9bb">artikatakita9@gmail.com</span></a>
                 </div>
             </div>
             <div class="col-lg-3 col-md-12 text-center text-lg-end">
